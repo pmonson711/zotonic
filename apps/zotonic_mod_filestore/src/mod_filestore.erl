@@ -234,6 +234,13 @@ See also
             description => "The S3 secret key or FTP/WebDAV password, used for authentication"
         },
         #{
+            key => s3region,
+            type => string,
+            default => "",
+            description => "The S3 region, required for S3 V4 signatures. "
+                           "Example: eu-west-1, us-east-1"
+        },
+        #{
             key => is_local_keep,
             type => boolean,
             default => false,
@@ -388,7 +395,8 @@ observe_filestore_credentials_lookup(#filestore_credentials_lookup{ path = Path 
                     credentials = #{
                         username => S3Key,
                         password => S3Secret,
-                        tls_options => filestore_config:tls_options(Context)
+                        tls_options => filestore_config:tls_options(Context),
+                        region => filestore_config:s3region(Context)
                     }
             }};
         false ->
@@ -416,7 +424,8 @@ observe_filestore_credentials_revlookup(
                             credentials = #{
                                 username => S3Key,
                                 password => S3Secret,
-                                tls_options => filestore_config:tls_options(Context)
+                                tls_options => filestore_config:tls_options(Context),
+                                region => filestore_config:s3region(Context)
                             }
                     }};
                 false ->

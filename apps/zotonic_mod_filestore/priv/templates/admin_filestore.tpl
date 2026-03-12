@@ -40,6 +40,10 @@
                                 <td><b>{{ m.filestore.s3url|escape }}</b></td>
                             </tr>
                             <tr>
+                                <td>{_ S3 Region _}</td>
+                                <td><b>{{ m.filestore.s3region|escape|default:"-" }}</b></td>
+                            </tr>
+                            <tr>
                                 <td>{_ Is upload enabled? _}</td>
                                 <td><b>{{ m.filestore.is_upload_enabled|if:_"Yes":_"No" }}</b></td>
                             </tr>
@@ -117,6 +121,14 @@
                             <div class="form-group">
                                 <label class="control-label" for="s3secret">{_ S3 API Secret or FTP/WebDAV password _}</label>
                                 <input type="password" id="s3secret" name="s3secret" value="{{ m.filestore.s3secret|escape }}" class="form-control" />
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label" for="s3region">{_ S3 Region (optional) _}</label>
+                                <input type="text" id="s3region" name="s3region" value="{{ m.filestore.s3region|escape }}" class="form-control" placeholder="eu-west-1" />
+                                <p class="help-block">
+                                    {_ Required for S3 V4 signatures. Use e.g. <b>eu-west-1</b> or <b>us-east-1</b>. Leave empty for V2 signatures. _}
+                                </p>
                             </div>
 
                             <div class="form-group">

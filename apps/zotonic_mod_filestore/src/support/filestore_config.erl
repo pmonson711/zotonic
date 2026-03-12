@@ -28,6 +28,7 @@
     s3url/1,
     s3key/1,
     s3secret/1,
+    s3region/1,
     tls_options/1,
     is_upload_enabled/1,
     is_local_keep/1,
@@ -75,6 +76,11 @@ s3key(Context) ->
 -spec s3secret(z:context()) -> binary().
 s3secret(Context) ->
     get_binary(s3secret, Context).
+
+%% @doc Get the S3 region for S3 V4 signatures.
+-spec s3region(z:context()) -> binary().
+s3region(Context) ->
+    get_binary(s3region, Context).
 
 %% @doc Get the TLS options for the connection to the remote filestore.
 %% The default will be set by one of the filestore application. These options
