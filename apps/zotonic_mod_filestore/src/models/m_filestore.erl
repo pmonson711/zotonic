@@ -167,6 +167,11 @@ m_get([ <<"s3secret">> | Rest ], _Msg, Context) ->
         true -> {ok, {filestore_config:s3secret(Context), Rest}};
         false -> {error, eacces}
     end;
+m_get([ <<"s3region">> | Rest ], _Msg, Context) ->
+    case z_acl:is_admin(Context) of
+        true -> {ok, {filestore_config:s3region(Context), Rest}};
+        false -> {error, eacces}
+    end;
 m_get([ <<"is_config_locked">> | Rest ], _Msg, Context) ->
     case z_acl:is_admin(Context) of
         true -> {ok, {filestore_config:is_config_locked(), Rest}};
